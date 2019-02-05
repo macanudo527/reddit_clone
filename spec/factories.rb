@@ -1,14 +1,17 @@
-FactoryGirl.define do
-
-factory :link do 
-	title 'example' 
-	url 'http://example.com' 
-end
+FactoryBot.define do
 
 factory :user do
-	email 'guy@example.com'
-	password 'password'
-	password_confirmation 'password'
+	sequence(:email) { |n| "test#{n}@example.com" }
+	password { 'password' }
+	password_confirmation { 'password' }
 end
+
+factory :link do 
+	title { 'example' } 
+	url { 'http://example.com' }
+	user 
+end
+
+
 
 end

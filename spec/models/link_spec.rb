@@ -13,7 +13,7 @@ RSpec.describe Link, :type => :model do
 		end
 
 		it 'should save successfully' do
-			link = Link.new(title: 'example link', url: 'http://www.example.com').save
+			link = Link.new(title: 'example link', url: 'http://www.example.com', user: @user).save
 			expect(link).to eq(true)
 		end
 
