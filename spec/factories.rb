@@ -12,6 +12,12 @@ factory :link do
 	user 
 end
 
+factory :vote do
+	vote { 1 }
+	user
+	link
+end
+
 
 
 end

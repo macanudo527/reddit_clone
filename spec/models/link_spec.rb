@@ -16,6 +16,26 @@ RSpec.describe Link, :type => :model do
 			link = Link.new(title: 'example link', url: 'http://www.example.com', user: @user).save
 			expect(link).to eq(true)
 		end
+	end
+	context 'voting system' do
+		before(:each) do
+			@link = create(:link)
+		end
+
+		it 'should increase the vote count when you upvote' do
+			expect { @link.upvote(@user) }.to change(@link, :upvotes).by(1) 
+		end
+
+		it 'should increase the vote count when you downvote' do
+			expect { @link.downvote(@user) }.to change(@link, :downvotes).by(1) 
+		end
+
+		it 'should increase total score when you upvote' do
+			expect { @link.upvote(@user) }.to change(@link, :total_score).by(1)
+		end
+		it 'should decrease total score when you downvote' do
+			expect { @link.downvote(@user) }.to change(@link, :total_score).by(-1)
+		end
 
 	end
 	context 'scope tests' do 

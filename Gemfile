@@ -11,16 +11,19 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise', '~> 4.2'
 gem 'bootsnap', '~> 1.1', '>= 1.1.7'
+gem 'bootstrap', '~> 4.0.0'
+gem 'jquery-rails'
 
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'rspec-rails'
-  gem "guard-rspec", require: false
-  gem "factory_bot_rails", "~> 4.0" 
+  gem 'guard-rspec', require: false
+  gem 'factory_bot_rails', '~> 4.0' 
   gem 'database_cleaner'
-  gem 'rails-controller-testing' 
+  gem 'rails-controller-testing'
+  gem 'capybara' 
 end
 
 group :development do
