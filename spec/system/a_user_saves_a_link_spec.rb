@@ -1,7 +1,7 @@
 require "rails_helper"
 
-RSpec.feature "User submits a link" do
-	scenario "they see the page for the submitted link" do
+RSpec.describe "Link Submission" do
+	it "shows you new page after submitting link" do
 		user = create(:user)
 		login_as(user)
 		link_title = "This Testing Rails book is awesome!"

@@ -1,34 +1,46 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Links</h1>
-
-<table>
-      <thead>
-        <td>Title</td>
-        <td>Url</td>
-      </thead>
-
-  <tbody>
-    <% @links.each do |link| %>
-    <div class="link row clearfix"
+<% @links.each do |link| %>
+    <div class="link row clearfix">
       <h2>
         <%= link_to link.title, link %>
-        <small class="author">Submitted <%= time_ago_in_words(link.created_at) %> by <%= link.user.email %></small>
+        <small class="author">Submitted <%= time_ago_in_words(link.created_at) %> ago 
+          by <%= link.user.email %></small>
       </h2>
 
-      <tr>
-        <td><%= link.title %></td>
-        <td><%= link.url %></td>
-        <td><%= link_to 'Show', link %></td>
-        <% if current_user == link.user %>
-          <td><%= link_to 'Edit', edit_link_path(link) %></td>
-          <td><%= link_to 'Destroy', link, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </div>
+    
+    <div class="btn-group" role="group"  aria-label="Links">
+      <%= link_to "Visit Link", link.url, class: "btn btn-secondary btn-sm" %>
+
+      <%= form_for [link, Vote.new], :remote => true do |f| %>
+        <%= f.hidden_field :link_id, :value => link.id %>        
+        <%= f.hidden_field :user_id, :value => current_user.id %>
+        <%= f.hidden_field :vote_value, :value => "1" %>
+        <%= button_tag(class: "btn btn-secondary btn-sm", id: "upvoter-#{link.id}") do %>
+         <span class="fa fa-chevron-up"></span>
+         Upvote
+         <%= content_tag(:span, link.upvotes(), id: "upvotes-#{link.id}") %>
+        <% end %>      
+
+      <% end %>
+      
+      <%= form_for [link, Vote.new], :remote => true do |f| %>
+        <%= f.hidden_field :link_id, :value => link.id %>        
+        <%= f.hidden_field :user_id, :value => current_user.id %>
+        <%= f.hidden_field :vote_value, :value => "-1" %>
+
+        <%= button_tag(class: "btn btn-secondary btn-sm", id: "downvoter-#{link.id}") do %>
+         <span class="fa fa-chevron-down"></span>
+         Downvote
+         <%= content_tag(:span, link.downvotes(), id: "downvotes-#{link.id}") %>         
         <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <% end %>
+    
+    </div>
+
+<% end %>
+
 
 <br>
-
-<%= link_to 'New Link', new_link_path %>
+<div class="btn-group mt-3" role="group" aria-label="New link">
+  <%= link_to 'New Link', new_link_path, class: "btn btn-primary btn-md" %>
+</div>

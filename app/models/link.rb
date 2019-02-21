@@ -3,6 +3,7 @@ class Link < ApplicationRecord
 	validates :url, presence: true
 	belongs_to :user
 	has_many :votes
+	has_many :comments
 
 	def upvote(user)
 		@vote = votes.new(vote_value: 1, user: user)
