@@ -11,21 +11,34 @@
 <% flash.each do |name, msg| %>
 	<%= content_tag(:div, msg, class: "alert alert-#{name}") %>
 <% end %>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+	<a class="navbar-brand" href="\">Reddit Clone</a>
+	<div class="collapse navbar-collapse" id="navbarCollapse">
 
 <% if user_signed_in? %>
-	<ul>
-		<li><%= link_to 'Submit Link', new_link_path %></li>
-		<li><%= link_to 'Account', edit_user_registration_path %></li>
-		<li><%= link_to 'Sign out', destroy_user_session_path, :method => :delete %></li>
-	</ul>
+
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item active"><%= link_to 'Submit Link', new_link_path, class: "nav-link" %></li>
+			<li class="nav-item active"><%= link_to 'Account', edit_user_registration_path, class: "nav-link"  %></li>
+			<li class="nav-item active"><%= link_to 'Sign out', destroy_user_session_path, :method => :delete, class: "nav-link"  %></li>
+		</ul>
 <% else %>
-	<ul>
-		<li><%= link_to 'Sign up', new_user_registration_path %></li>
-		<li><%= link_to 'Sign in', new_user_session_path %></li>
+	<ul class="navbar-nav mr-auto">
+		<li class="nav-item active"><%= link_to 'Sign up', new_user_registration_path, class: "nav-link" %></li>
+		<li class="nav-item active"><%= link_to 'Sign in', new_user_session_path, class: "nav-link" %></li>
 	</ul>
 <% end %>
+</div>
+</nav>
 
-<%= yield %>
+<div id="main_content" class="container">
+	<% flash.each do |name, msg| %>
+		<%= content_tag(:div, msg, class: 'alert alert-info') %>
+	<% end %>
+	<div id="content" class="col-md-9 center-block">
+		<%= yield %>
+	</div>
+</div>
 
 </body>
 </html>

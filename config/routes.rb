@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
+  resources :comments
   devise_for :users
 
-  resources :links
+  resources :links do
+  	resources :votes
+  end
 
   root 'links#index'
 
