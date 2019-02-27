@@ -15,7 +15,7 @@ gem 'bootsnap', '~> 1.1', '>= 1.1.7'
 gem 'bootstrap', '>= 4.1.2'
 gem 'font-awesome-sass', '~> 4.7.0'
 gem 'simple_form'
-
+gem 'record_tag_helper', '~> 1.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

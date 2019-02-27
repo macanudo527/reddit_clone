@@ -24,11 +24,14 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
-    @comment = Comment.new(comment_params)
+    @link = Link.find(params[:link_id])
+    @comment = @link.comments.new(comment_params)
+    @comment.user = current_user
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
+        format.html { redirect_to @link, notice: 'Comment was successfully created.' }
+        format.js { }
         format.json { render :show, status: :created, location: @comment }
       else
         format.html { render :new }
@@ -54,9 +57,10 @@ class CommentsController < ApplicationController
   # DELETE /comments/1
   # DELETE /comments/1.json
   def destroy
+    @link = @comment.link
     @comment.destroy
     respond_to do |format|
-      format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
+      format.html { redirect_to @link, notice: 'Comment was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
